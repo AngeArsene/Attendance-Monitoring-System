@@ -59,3 +59,18 @@ SQL;
         } catch (PDOException $_error) { send_error(); }
 
     }
+
+    function get(string $table_name): array {
+        $db_connection = connect_to_database();
+
+        $prepared_statement = $db_connection->prepare("SELECT * FROM $table_name");
+
+        unset($db_connection);
+
+        try {
+            $prepared_statement->execute();
+            return $prepared_statement->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $_error) { send_error(); }
+
+    }
