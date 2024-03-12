@@ -232,7 +232,7 @@
                                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                           Close
                                         </button>
-                                        <button type="submit" name="delete-row" class="btn btn-danger">Delete</button>
+                                        <button type="submit" name="delete-btn" class="btn btn-danger">Delete</button>
                                       </div>
                                     </form>
                                   </div>
