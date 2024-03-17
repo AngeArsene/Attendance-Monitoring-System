@@ -11,7 +11,7 @@
           $page_name = "Teacher's CRUD Panel"; $dirname = '../../';
           $username = ucfirst(strtok($user['last_name'], " ")); $profile_img = ($user['gender'] === 'male' ? '1' : '2'); 
 
-          $table_name = 'teacher'; $persons = table($table_name);
+          $table_name = 'teacher'; $persons = table($table_name); $departments = get('department');
           
           include_once "{$dirname}views/partials/header.php" ?>
 

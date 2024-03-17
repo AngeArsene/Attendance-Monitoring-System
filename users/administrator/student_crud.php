@@ -11,7 +11,7 @@
           $page_name = "Student's CRUD Panel"; $dirname = '../../';
           $username = ucfirst(strtok($user['last_name'], " ")); $profile_img = ($user['gender'] === 'male' ? '1' : '2'); 
 
-          $table_name = 'student'; $persons = table($table_name); $parents = getParents();
+          $table_name = 'student'; $persons = table($table_name); $parents = get('parent');
           
           include_once "{$dirname}views/partials/header.php" ?>
 

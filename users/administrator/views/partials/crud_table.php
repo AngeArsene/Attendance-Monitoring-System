@@ -51,6 +51,17 @@
                                         <label class="form-label" for="basic-default-phone">Address</label>
                                         <input type="text" id="basic-default-phone" class="form-control phone-mask" name="address" placeholder="658 799 8941" required>
                                       </div>
+                                      <?php if ($table_name === 'teacher'): ?>
+                                        <div class="mb-3">
+                                          <label for="gender" class="form-label">Department</label>
+                                          <select id="gender" class="select2 form-select" name="department" required>
+                                            <?php foreach ($departments as $department): 
+                                                  $department_name = strtoupper($department['name'])?>
+                                              <option value="<?= $department['id'] ?>"><?= $department_name ?></option>
+                                            <?php endforeach; ?>
+                                          </select>
+                                        </div>
+                                      <?php endif; ?>
                                       <?php if ($table_name === 'student'): ?>
                                         <div class="mb-3">
                                           <label class="form-label" for="basic-default-dob">Date Of BIRTH</label>
@@ -95,6 +106,9 @@
                         <th scope="col">Gender</th>
                         <th scope="col">Phone Number</th>
                         <th scope="col">Address</th>
+                        <?php if ($table_name === 'teacher'): ?>
+                          <th scope="col">Department</th>
+                        <?php endif; ?>
                         <?php if ($table_name === 'student'): ?>
                           <th scope="col">Parent Name</th>
                         <?php endif; ?>
@@ -110,6 +124,9 @@
                         <td><?= ucfirst($person['gender']) ?></td>
                         <td><?= $person['phone_number'] ?></td>
                         <td><?= $person['address'] ?></td>
+                        <?php if ($table_name === 'teacher'): ?>
+                          <td><?= $person['department'] ?? "NONE" ?></td>
+                        <?php endif; ?>
                         <?php if ($table_name === 'student'): ?>
                           <td><?= $person['parent'] ?? "NONE" ?></td>
                         <?php endif; ?>
