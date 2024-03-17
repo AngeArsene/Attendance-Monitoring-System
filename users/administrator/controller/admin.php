@@ -69,3 +69,11 @@ SQL;
         } catch (PDOException $_error) { send_error(); }
 
     }
+
+    function abbrev_dep_name (string $name): string {
+        return match ($name) {
+            'computer science' => 'Comp Sci',
+            'management' => 'Man',
+            'digital marketing' => 'Dig Ma'
+        };
+    }

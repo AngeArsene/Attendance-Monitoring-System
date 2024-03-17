@@ -105,6 +105,8 @@
                 
                 $entry_data['dob'] = sanitize_input_text($_POST['dob']);
                 $entry_data['parent'] = sanitize_input_text($_POST['parent']);
+            } else if ($table_name === 'teacher') {
+                $entry_data['department'] = sanitize_input_text($_POST['department']);
             }
 
             return $entry_data;

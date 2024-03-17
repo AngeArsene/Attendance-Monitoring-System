@@ -125,7 +125,7 @@
                         <td><?= $person['phone_number'] ?></td>
                         <td><?= $person['address'] ?></td>
                         <?php if ($table_name === 'teacher'): ?>
-                          <td><?= $person['department'] ?? "NONE" ?></td>
+                          <td><?= abbrev_dep_name($person['department']) ?? "NONE" ?></td>
                         <?php endif; ?>
                         <?php if ($table_name === 'student'): ?>
                           <td><?= $person['parent'] ?? "NONE" ?></td>
@@ -201,7 +201,18 @@
                                         <label for="address" class="form-label">Address</label>
                                         <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="<?= $person['address'] ?>"
                                         minlength="4" maxlength="255">
-                                      </div>                                                                         
+                                      </div>
+                                      <?php if ($table_name === 'teacher'): ?>                                                                       
+                                        <div class="mb-3 col-md-6">
+                                          <label for="gender" class="form-label">Department</label>
+                                            <select id="gender" class="select2 form-select" name="department" required>
+                                              <?php foreach ($departments as $department): 
+                                                    $department_name = strtoupper($department['name'])?>
+                                                <option <?= $person['department'] === $department['name'] ? 'selected' : '' ?> value="<?= $department['id'] ?>"><?= $department_name ?></option>
+                                              <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                      <?php endif; ?>                                                                      
                                     </div>
                                   </div>
                                   <div class="modal-footer">

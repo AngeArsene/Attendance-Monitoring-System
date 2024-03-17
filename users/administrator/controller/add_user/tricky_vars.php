@@ -8,3 +8,6 @@
 
     $admin = ($table_name === 'administrator') ? '' : ',registered_by';
     $admin_val = ($table_name === 'administrator') ? '' : ',' . $_POST['registered_by'];
+
+    $department = ($table_name === 'teacher') ? 'department,' : '';
+    $department_value = ($table_name === 'teacher') ? ':department,' : '';

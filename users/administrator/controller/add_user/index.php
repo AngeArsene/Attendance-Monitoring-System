@@ -21,11 +21,11 @@
         $sql_query = <<<SQL
             INSERT INTO $table_name (
                 first_name, last_name, gender,
-                $dob email, address, phone_number,
+                $dob email, address, $department phone_number,
                 password $parent $admin
             ) VALUES (
                 :first_name, :last_name, :gender,
-                $dob_val :email, :address, $phone_number,
+                $dob_val :email, :address, $department_value $phone_number,
                 :password $parent_val $admin_val 
             );
 SQL;
@@ -41,10 +41,10 @@ SQL;
 
             go_to($_SESSION['previous-page-url'], $_SESSION['user'], RECORD_ADDED_SUCCESSFUL, true);
 
-        } catch (PDOException $_error) {
+        } catch (PDOException $_error) { 
             echo "<pre>";
-            echo $_error->getMessage();
-            echo "</pre>"; 
-        }
+            var_dump($user_info);
+            echo '</pre>';
+         }
 
     } else { send_error(INVALID_REQUEST); }
