@@ -16,7 +16,7 @@
 
         $db_connection = connect_to_database();
 
-        require_once 'tricky_vars.php';
+        require_once "../tricky_vars.php";
 
         $sql_query = <<<SQL
             INSERT INTO $table_name (

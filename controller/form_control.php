@@ -114,15 +114,21 @@
         } else { send_error(INVALID_REQUEST); }
     }
 
-    function check_edit_form(): array {
+    function check_edit_form(string $table_name = null): array {
         if ($_SERVER['REQUEST_METHOD'] === "POST" && (isset($_POST['edit-btn']))) {
-            return [
+            $entry_data =  [
                 'first_name' => validate_first_name(),
                 'last_name' => validate_last_name(),
                 'email' => validate_email(),
                 'gender' => sanitize_input_text($_POST['gender']),
                 'address' => validate_address(),
             ];
+
+            if (isset($table_name) && $table_name === 'teacher') {
+                $entry_data['department'] = sanitize_input_text($_POST['department']);
+            }
+
+            return $entry_data;
 
         } else { send_error(INVALID_REQUEST); }
     }

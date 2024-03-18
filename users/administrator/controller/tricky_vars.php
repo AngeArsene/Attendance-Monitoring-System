@@ -11,3 +11,4 @@
 
     $department = ($table_name === 'teacher') ? 'department,' : '';
     $department_value = ($table_name === 'teacher') ? ':department,' : '';
+    $dep = "department = :department,";
