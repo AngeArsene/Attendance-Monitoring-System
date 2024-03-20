@@ -9,7 +9,7 @@
             $join_field = ($table_name === 'teacher' ? 'department' : 'parent');
             $origin_field = ($table_name === 'teacher' ? 'name' : 'first_name');
 
-            $join_query = <<<SQL
+            return <<<SQL
             SELECT $table_name.id, $table_name.first_name, $table_name.last_name,
                    $table_name.email, $table_name.gender, $table_name.address, $table_name.phone_number,
                    $join_field.$origin_field AS $join_field
@@ -18,7 +18,8 @@
             ON $table_name.$join_field = $join_field.id;
 SQL;
 
-            return $join_query;
+        } elseif ($table_name === 'department') {
+            return "SELECT * FROM course WHERE department = $user_id";
         }
 
         return "SELECT * FROM $table_name" . (isset($user_id) ? " WHERE id <> $user_id" : "");
@@ -65,6 +66,21 @@ SQL;
         try {
             $prepared_statement->execute();
             return $prepared_statement->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $_error) { send_error(); }
+
+    }
+
+    function tuple(string $table_name, string $id): array {
+        $db_connection = connect_to_database();
+
+        $prepared_statement = $db_connection->prepare("SELECT * FROM $table_name WHERE id = $id");
+
+        unset($db_connection);
+
+        try {
+            $prepared_statement->execute();
+            return $prepared_statement->fetch(PDO::FETCH_ASSOC);
 
         } catch (PDOException $_error) { send_error(); }
 
