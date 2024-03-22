@@ -71,7 +71,7 @@ SQL;
 
     }
 
-    function tuple(string $table_name, string $id): array {
+    function tuple(string $table_name, string $id) {
         $db_connection = connect_to_database();
 
         $prepared_statement = $db_connection->prepare("SELECT * FROM $table_name WHERE id = $id");
@@ -80,7 +80,14 @@ SQL;
 
         try {
             $prepared_statement->execute();
-            return $prepared_statement->fetch(PDO::FETCH_ASSOC);
+            $result = $prepared_statement->fetch(PDO::FETCH_ASSOC);
+
+            if ($result === false) {
+                return go_to($_SESSION['previous-page-url'], $_SESSION['user'], INVALID_REQUEST, true);
+                exit();
+            };
+
+            return $result;
 
         } catch (PDOException $_error) { send_error(); }
 

@@ -5,8 +5,8 @@
     require_once '../../controller/redirect.php';
     require_once 'controller/admin.php';
     
-    if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'administrator') {
-        $user = $_SESSION['user']; $page_url = '/users/' . $user['role'] . '/departments.php';
+    if (isset($_SESSION['user'], $_GET['id']) && $_SESSION['user']['role'] === 'administrator') {
+        $user = $_SESSION['user']; $page_url = '/users/' . $user['role'] . '/departments.php?id=' . $_GET['id'];
 
         save_file_path($page_url);
         
@@ -15,7 +15,8 @@
 
         $id = $_GET['id']; $dep_name = tuple('department', $id)['name'];
 
-        $table_name = 'department'; $courses = table($table_name, $id);
+
+        $table_name = 'course'; $courses = table('department', $id);
         
         include_once "{$dirname}views/partials/header.php";
 

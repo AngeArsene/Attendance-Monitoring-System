@@ -23,6 +23,6 @@
 
             go_to($_SESSION['previous-page-url'], $_SESSION['user'], RECORD_DELETED_SUCCESSFUL, true);
 
-        } catch (PDOException $_error) { send_error(); }
+        } catch (PDOException $_error) { echo $_error->getMessage(); }
 
     } else { send_error(INVALID_REQUEST); }
