@@ -133,6 +133,21 @@
         } else { send_error(INVALID_REQUEST); }
     }
 
+    function check_dep_edit_form(string $table_name = null): array {
+        if ($_SERVER['REQUEST_METHOD'] === "POST" && (isset($_POST['edit-btn']))) {
+            $entry_data =  [
+                'name' => sanitize_input_text($_POST['name']),
+                'teacher' => sanitize_input_text($_POST['teacher']),
+                'NOH' => sanitize_input_text($_POST['NOH']),
+                'start_date' => sanitize_input_text($_POST['start_date']),
+                'end_date' => sanitize_input_text($_POST['end_date'])
+            ];
+
+            return $entry_data;
+
+        } else { send_error(INVALID_REQUEST); }
+    }
+
     function generate_ran_password() {
         $length = random_int(8, 16);
         $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()';

@@ -14,7 +14,7 @@
         $username = ucfirst(strtok($user['last_name'], " ")); $profile_img = ($user['gender'] === 'male' ? '1' : '2'); 
 
         $id = $_GET['id']; $dep_name = tuple('department', $id)['name'];
-
+        $teachers = table('teacher', $id);
 
         $table_name = 'course'; $courses = table('department', $id);
         

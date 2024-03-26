@@ -5,6 +5,10 @@
     require_once '../../controller/redirect.php';
 
     function generate_query (string $table_name, int $user_id = null): string {
+        
+        if ($table_name === 'teacher' && isset($user_id))
+            return "SELECT * FROM $table_name WHERE department = $user_id";
+            
         if ($table_name === 'teacher' || $table_name === 'student') {
             $join_field = ($table_name === 'teacher' ? 'department' : 'parent');
             $origin_field = ($table_name === 'teacher' ? 'name' : 'first_name');

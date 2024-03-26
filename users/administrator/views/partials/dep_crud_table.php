@@ -64,7 +64,7 @@
                               <!-- Modal -->
                             <div class="modal fade" id="basicModal<?= $id ?>" tabindex="-1" aria-hidden="true">
                               <div class="modal-dialog" role="document">
-                                <form class="modal-content" method="POST" action="/users/administrator/controller/edit_row">
+                                <form class="modal-content" method="POST" action="/users/administrator/controller/edit_dep_row">
                                   <input type="hidden" name="id" value="<?= $id ?>">
                                   <input type="hidden" name="table" value="<?= $table_name ?>">
                                   <div class="modal-header">
@@ -74,50 +74,31 @@
                                   <div class="modal-body">
                                     <div class="row">
                                       <div class="mb-3 col-md-6">
-                                        <label for="firstName" class="form-label">First Name</label>
-                                        <input class="form-control" type="text" id="name" name="first_name" value="<?= $person['first_name'] ?>"
+                                        <label for="name" class="form-label">Name</label>
+                                        <input class="form-control" type="text" id="name" name="name" value="<?= $course['name'] ?>"
                                         minlength="4" maxlength="140">
                                       </div>
                                       <div class="mb-3 col-md-6">
-                                        <label for="firstName" class="form-label">Last Name</label>
-                                        <input class="form-control" type="text" id="name" name="last_name" value="<?= $person['last_name'] ?>"
-                                        minlength="4" maxlength="140">
-                                      </div>
-                                      <div class="mb-3 col-md-6">
-                                        <label for="email" class="form-label">E-mail</label>
-                                        <input class="form-control" type="email" id="email" name="email" value="<?= $person['email'] ?>" placeholder="john.doe@example.com">
-                                      </div>
-                                      <div class="mb-3 col-md-6">
-                                        <label for="gender" class="form-label">Gender</label>
-                                        <select id="gender" class="select2 form-select" name="gender">
-                                          <option value="male">Male</option>
-                                          <option value="female" <?= $person['gender'] === 'female' ? 'selected' : '' ?>>Female</option>
+                                        <label for="teacher" class="form-label">Teacher</label>
+                                        <select id="teacher" class="select2 form-select" name="teacher" required>
+                                          <?php foreach ($teachers as $teacher): 
+                                                $teacher_name = $teacher['last_name'] . " " . $teacher['first_name'] ?>
+                                            <option value="<?= $teacher['id'] ?>"><?= $teacher_name ?></option>
+                                          <?php endforeach; ?>
                                         </select>
                                       </div>
                                       <div class="mb-3 col-md-6">
-                                        <label class="form-label" for="phoneNumber">Phone Number</label>
-                                        <div class="input-group input-group-merge">
-                                          <span class="input-group-text">CMR (+237)</span>
-                                          <input type="number" id="phone-number" name="phone-number" class="form-control" value="<?= $person['phone_number'] ?>" placeholder="602 555 111"
-                                          minlength="9" maxlength="9" min="600000000" max="699999999">
-                                        </div>
-                                      </div>   
-                                      <div class="mb-3 col-md-6">
-                                        <label for="address" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="<?= $person['address'] ?>"
-                                        minlength="4" maxlength="255">
+                                        <label for="noh" class="form-label">N O H</label>
+                                        <input class="form-control" type="number" id="noh" name="NOH" value="<?= $course['NOH'] ?>" placeholder="20">
                                       </div>
-                                      <?php if ($table_name === 'teacher'): ?>                                                                       
-                                        <div class="mb-3 col-md-6">
-                                          <label for="gender" class="form-label">Department</label>
-                                            <select id="gender" class="select2 form-select" name="department" required>
-                                              <?php foreach ($departments as $department): 
-                                                    $department_name = strtoupper($department['name'])?>
-                                                <option <?= $person['department'] === $department['name'] ? 'selected' : '' ?> value="<?= $department['id'] ?>"><?= $department_name ?></option>
-                                              <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                      <?php endif; ?>                                                                      
+                                      <div class="mb-3 col-md-6">
+                                        <label for="start-date" class="form-label">Start date</label>
+                                        <input class="form-control" type="date" id="start-date" name="start_date" value="<?= $course['start_date'] ?>" placeholder="20">
+                                      </div>
+                                      <div class="mb-3 col-md-6">
+                                        <label for="end-date" class="form-label">End date</label>
+                                        <input class="form-control" type="date" id="end-date" name="end_date" value="<?= $course['end_date'] ?>" placeholder="20">
+                                      </div>                                                                 
                                     </div>
                                   </div>
                                   <div class="modal-footer">
